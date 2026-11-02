@@ -16,8 +16,6 @@ A Waterhole extension that adds customizable cover images to user profiles.
 
 Supported upload formats: JPEG, PNG, and WebP.
 
-Upload size limit: 2 MB.
-
 Uploaded images are resized down to fit within a maximum dimension of 1600 x 1600 pixels while preserving their aspect ratio. Images are encoded as WebP at quality 80. Images smaller than the configured maximum dimensions are not enlarged.
 
 ## Permissions
@@ -38,24 +36,22 @@ Waterhole Core 0.7 and 0.8 have been tested with this extension.
 
 ## Installation
 
-Add the GitHub repository to your application's root `composer.json`:
-
-```json
-{
-    "repositories": {
-        "waterhole-user-cover": {
-            "type": "vcs",
-            "url": "https://github.com/efast1568/waterhole-user-cover"
-        }
-    }
-}
-```
-
-Then install the extension:
+Install the extension using Composer:
 
 ```bash
 composer require subarist/waterhole-user-cover:^1.0
 ```
+
+## Post-installation
+
+Run the database migrations and clear the Laravel caches:
+
+```bash
+php artisan migrate --force
+php artisan optimize:clear
+```
+
+The migration creates the database table required by the extension. Laravel only runs pending migrations, so this command does not recreate tables that have already been migrated.
 
 ## License
 
