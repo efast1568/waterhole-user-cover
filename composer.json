@@ -1,0 +1,25 @@
+{
+    "name": "subarist/waterhole-user-cover",
+    "description": "User cover images for Waterhole",
+    "type": "waterhole-extension",
+    "require": {
+        "waterhole/core": "^0.7.0 || ^0.8.0",
+        "intervention/image-laravel": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Subarist\\WaterholeUserCover\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Subarist\\WaterholeUserCover\\WaterholeUserCoverServiceProvider"
+            ]
+        },
+        "waterhole": {
+            "name": "User Cover"
+        }
+    },
+    "license": "MIT"
+}

@@ -1,0 +1,348 @@
+.user-profile__card {
+background-image: linear-gradient(
+    120deg,
+    var(--user-color, #5a6480),
+    color-mix(in srgb, var(--user-color, #5a6480) 75%, #15161a)
+);
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.user-profile__card .avatar {
+    width: 13ch;
+    border: 4px solid #fff;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.user-cover-preview {
+    width: min(100%, 720px);
+    overflow: hidden;
+    border-radius: var(--radius-sm, 6px);
+}
+
+.user-cover-preview__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+}
+
+/* Edit Cover modal */
+.user-cover-editor {
+    min-width: 0;
+    color: var(--color-text, inherit);
+}
+
+.user-cover-editor__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.user-cover-editor__header h2 {
+    margin: 0 0 0.4rem;
+}
+
+.user-cover-editor__header p {
+    margin: 0;
+}
+
+.user-cover-editor__close {
+    flex: 0 0 auto;
+    min-width: 2.25rem;
+    padding-inline: 0.5rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
+
+.user-cover-editor__preview {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 21 / 5;
+    border-radius: var(--radius-sm, 6px);
+    background: var(--color-surface-alt, #202329);
+}
+
+.user-cover-editor__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.user-cover-editor__image[hidden],
+.user-cover-editor__empty[hidden] {
+    display: none;
+}
+
+.user-cover-editor__empty {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    color: var(--color-text-muted, #a0a0a0);
+}
+
+.user-cover-editor__field {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.user-cover-editor__field .form-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.user-cover-editor__range {
+    width: 100%;
+    accent-color: #e11d74;
+    cursor: pointer;
+}
+
+.user-cover-editor__range:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.user-cover-editor__buttons {
+    align-items: center;
+}
+
+.user-cover-editor__spacer {
+    flex: 1 1 auto;
+}
+
+.user-cover-editor__remove {
+    color: var(--color-danger-text, #ef4444);
+}
+
+.user-cover-editor__buttons .bg-danger {
+    background-color: #e11d74;
+    border-color: #e11d74;
+    color: #fff;
+}
+
+.user-cover-editor__buttons button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+@media (max-width: 480px) {
+    .user-cover-editor__buttons {
+        gap: 0.5rem;
+    }
+
+    .user-cover-editor__buttons button {
+        padding-inline: 0.7rem;
+    }
+}
+
+
+/* Inline cover editor on the user's own profile */
+.user-cover-editor-panel {
+    min-width: 0;
+    padding: 1rem;
+    color: #f2f2f2;
+    background: #111;
+    border: 1px solid #303030;
+    border-radius: var(--radius-sm, 6px);
+}
+
+.user-cover-editor-panel > h2 {
+    margin: 0;
+}
+
+.user-cover-editor-panel .user-cover-editor {
+    width: 100%;
+    min-width: 0;
+    color: #f2f2f2;
+}
+
+.user-cover-editor-panel .Alert-body {
+    color: #f2f2f2;
+    background: #202020;
+    border-color: #383838;
+}
+
+.user-cover-editor-panel .user-cover-editor__preview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+    background: #202020;
+}
+
+.user-cover-editor-panel .user-cover-editor__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-cover-editor-panel .user-cover-editor__empty {
+    position: absolute;
+    inset: 0;
+}
+
+.user-cover-editor-panel .user-cover-editor__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.user-cover-editor-panel .user-cover-editor__buttons > button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+.user-cover-editor-panel .user-cover-editor__spacer {
+    display: none;
+}
+
+.user-cover-editor-panel .user-cover-editor__field .row {
+    display: none;
+}
+@media (max-width: 480px) {
+    .user-cover-editor-panel {
+        padding: 0.75rem;
+    }
+}
+
+/* Cover editor buttons: full width, centered icon + label */
+.user-cover-editor__buttons > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    width: 100%;
+    text-align: center;
+}
+
+.user-cover-editor__buttons > button > svg,
+.user-cover-editor__buttons > button > i {
+    flex: 0 0 auto;
+}
+
+
+
+/* User cover dialog */
+.dialog__header:has(+ .user-cover-editor),
+.dialog__header:has(~ .user-cover-editor) {
+    padding: var(--space-md);
+}
+
+.dialog__header .dialog__title {
+    text-align: center;
+}
+
+/* Dialog backdrop theme */
+.user-cover-dialog-host[data-theme="dark"]::part(backdrop) {
+    background: hsla(0, 0%, 5%, 0.9);
+}
+
+.user-cover-dialog-host[data-theme="light"]::part(backdrop) {
+    background: rgba(16, 24, 33, 0.9);
+}
+
+/* Cover editor dialog */
+.user-cover-dialog .dialog__header {
+    position: relative;
+    padding: var(--space-md);
+    background: var(--palette-bg, #fff);
+    border-radius: var(--radius) var(--radius) 0 0;
+    align-items: end;
+}
+
+.user-cover-dialog #dialog-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    width: max-content;
+    max-width: calc(100% - 6rem);
+    text-align: center;
+    font-size: 18px;
+}
+
+.user-cover-dialog .user-cover-editor {
+    font-size: 14px;
+}
+
+.user-cover-dialog .user-cover-editor__buttons {
+    font-size: 16px;
+}
+
+.user-cover-dialog {
+    background: var(--color-bg);
+}
+
+.user-profile__content {
+    justify-content: space-between;
+    min-height: 160px;
+}
+
+
+/* Profile cover text shadow */
+.user-profile__card .user-profile__name {
+    color: #fff;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.85),
+        0 4px 12px rgba(0, 0, 0, 0.65);
+}
+
+.user-profile__card .user-profile__headline {
+    color: #ebebeb;
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.9),
+        0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.user-profile__card .user-profile__info > :not(.user-groups) {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.content.user-profile__bio {
+    color: #ebebeb;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+/* Profile cover text shadow */
+.user-profile__card .user-profile__name {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85),
+                 0 4px 12px rgba(0, 0, 0, 0.65);
+}
+
+
+
+.user-profile__card .user-profile__info .color-muted {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* SVG icon shadow */
+.user-profile__card .user-profile__info svg {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.95))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.65));
+}
+
+.user-profile__card .user-profile__controls > ui-popup > a.btn {
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+}
+
+.dialog.dialog--sm.user-cover-dialog {
+    width: 40ch;
+}

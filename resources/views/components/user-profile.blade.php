@@ -1,0 +1,106 @@
+@php
+    $userCover = \Subarist\WaterholeUserCover\Models\UserCover::where('user_id', $user->id)->first();
+    $userName = $user->name ?? '';
+$userHue = 0;
+
+for ($i = 0, $len = strlen($userName); $i < $len; $i++) {
+    $userHue += ord($userName[$i]);
+}
+
+$userColor = 'hsl(' . ($userHue % 360) . ' 35% 37%)';
+@endphp
+
+<x-waterhole::forum-layout
+    :title="$title"
+    :seo="[
+        'description' => $user->headline ?: $user->bio_html,
+        'url' => $user->url,
+        'type' => 'profile',
+        'image' => $user->avatar_url,
+        'schema' => [
+            '@type' => 'ProfilePage',
+            'mainEntity' => [
+                '@type' => 'Person',
+                'name' => Waterhole\username($user),
+                'url' => $user->url,
+                'image' => $user->avatar_url ?: null,
+            ],
+        ],
+    ]"
+>
+    <x-slot:head>
+        {{ $head ?? '' }}
+    </x-slot:head>
+
+    <div
+        class="section container user-profile stack gap-gutter"
+        data-group="{{ $user->groups->where('is_public', true)->pluck('id')->join(' ') }}"
+    >
+        <div
+            class="card card__body user-profile__card"
+            style="--user-color: {{ $userColor }}; @if ($userCover) background-image: url(&quot;{{ $userCover->url }}&quot;); background-size: cover; background-repeat: no-repeat; background-position: {{ (int) $userCover->position_x }}% {{ (int) $userCover->position_y }}%; @endif"
+            data-shortcut-selection-key="{{ dom_id($user) }}"
+            data-shortcut-selection-default
+        >
+            <div class="user-profile__controls">
+                <x-waterhole::action-menu
+                    :for="$user"
+                    placement="bottom-end"
+                    :button-attributes="['class' => 'btn']"
+                >
+                    <x-slot:button>
+                        @icon('tabler-settings')
+                        <span>
+                            {{ __('waterhole::system.controls-button') }}
+                        </span>
+                        @icon('tabler-chevron-down')
+                        <ui-tooltip>
+                            {{ __('waterhole::system.controls-button') }}
+                            <x-waterhole::shortcut-label
+                                shortcut="selection.actions"
+                            />
+                        </ui-tooltip>
+                    </x-slot:button>
+                </x-waterhole::action-menu>
+            </div>
+
+            <div class="row align-start gap-x-xl gap-y-md wrap">
+                <x-waterhole::avatar :user="$user" />
+
+                <div class="grow stack gap-xs user-profile__content">
+                    <h1 class="h1 user-profile__name" data-page-target="title">
+                        {{ Waterhole\username($user) }}
+                    </h1>
+
+                    @if ($user->headline)
+                        <p class="h4 user-profile__headline">
+                            {{ Waterhole\emojify($user->headline) }}
+                        </p>
+                    @endif
+
+                    @if ($user->bio_html)
+                        <div class="content user-profile__bio">
+                            {{ $user->bio_html }}
+                        </div>
+                    @endif
+
+                    <div
+                        class="row gap-sm wrap align-center color-muted text-xs user-profile__info"
+                    >
+                        @components(\Waterhole\Extend\Ui\UserInfo::class, compact('user'))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="with-sidebar">
+            <div class="sidebar sidebar--sticky">
+                <x-waterhole::collapsible-nav
+                    :components="Waterhole\build_components(\Waterhole\Extend\Ui\UserNav::class, compact('user'))"
+                />
+            </div>
+
+            <div>{{ $slot }}</div>
+        </div>
+    </div>
+</x-waterhole::forum-layout>
