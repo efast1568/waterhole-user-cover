@@ -12,7 +12,7 @@ A Waterhole extension that adds customizable cover images to user profiles.
 - Display a generated background color when no cover image is configured.
 - Store uploaded images using the configured Waterhole uploads disk.
 
-<img width="1128" height="489" alt="螢幕擷取畫面 2026-11-02 150958" src="https://github.com/user-attachments/assets/364af9d1-47cb-441e-b4ff-c054ef43368c" />
+![Waterhole User Cover](screenshots-1.png)
 
 ## Image handling
 
@@ -20,7 +20,7 @@ Supported upload formats: JPEG, PNG, and WebP.
 
 Uploaded images are resized down to fit within a maximum dimension of 1600 x 1600 pixels while preserving their aspect ratio. Images are encoded as WebP at quality 80. Images smaller than the configured maximum dimensions are not enlarged.
 
-<img width="433" height="524" alt="螢幕擷取畫面 2026-11-02 151034" src="https://github.com/user-attachments/assets/9ed98542-aa2f-4afe-b8d1-7061502cd642" />
+![Waterhole User Cover](screenshots-2.png)
 
 ## Permissions
 
